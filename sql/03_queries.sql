@@ -1,7 +1,7 @@
 COACHING INSTITUTE PERFORMANCE ANALYTICS
 -- ============================================================
 
- /*Q1*/
+ /*Q1 Which students have attendance below 75% in any subject? */
 
 select 
 s.name,
@@ -17,7 +17,7 @@ join subjects sub on a.subject_id = sub.subject_id
 group by s.student_id, sub.subject_id
 having attendance_pct < 75;
 
-/*Q2*/
+/*Q2 What is the average test score per batch per subject over time? */
 
 SELECT 
     b.batch_name,
@@ -32,7 +32,7 @@ JOIN subjects sub ON t.subject_id = sub.subject_id
 GROUP BY b.batch_id, sub.subject_id, t.test_date, t.max_marks
 ORDER BY t.test_date;
  
-/*Q3*/
+/*Q3 Which student improved the most across consecutive tests? */
 
 select 
 s.name ,
@@ -50,7 +50,7 @@ join subjects sub on t.subject_id = sub.subject_id
 order by improvement desc;
 
 
-/*Q4*/
+/*Q4 How much fee is pending course-wise and who are the defaulters? */
 
 select 
 s.name ,
@@ -71,7 +71,7 @@ group by s.student_id , s.name , c.course_name, s.total_fee
 having pending>0
 order by pending desc;
 
-/*Q5*/
+/*Q5  Which faculty's batch has the highest average score? */
 
 select 
 f.name as faculty_name,
@@ -85,7 +85,7 @@ join faculty f on b.faculty_id = f.faculty_id
 group by f.faculty_id,b.batch_id
 order by avg_score_pct desc;
 
-/*Q6*/
+/*Q6 What is the pass/fail ratio in each course? */
 select 
 c.course_name,
 count(*)as total_appeared,
@@ -98,7 +98,7 @@ join courses c on s.course_id = c.course_id
 group by c.course_id;
 
 
-/*Q7*/
+/*Q7  How many students enrolled each month? */
 
 select 
 year(enrollment_date)as year,
@@ -109,7 +109,7 @@ from students
 group by year(enrollment_date),month(enrollment_date)
 order by year,month;
 
-/*Q8*/
+/*Q8  Which subject has the lowest average score across all batches? */
 
 select
 sub.subject_name,
@@ -122,7 +122,7 @@ order by avg_pct asc
 limit 1;
 
 
-/*Q9*/
+/*Q9  What is the gender-wise performance comparison per course? */
 
 select 
 c.course_name,
@@ -146,7 +146,7 @@ from students
 group by city 
 order by total_student desc;
 
-/*Q11 attendance vs score correlation*/
+/*Q11 How does attendance correlate with test scores? */
 
 select 
 s.name ,
@@ -161,7 +161,7 @@ group by s.student_id,s.name
 order by  attendance_pct desc ;
 
 
-/*QMOnth over month score trend per batch */
+/*Q12 - What is the month-over-month average score trend per batch? */
 
 select 
 b.batch_name,
